@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c8a65d98f4b54668b6444feb922aab01" Name="Diagram1" >
+        <EntityTypeShape EntityType="DP_PortalModel.USER" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="DP_PortalModel.USERS_TYPE" Width="1.5" PointX="0.75" PointY="1.625" />
+        <AssociationConnector Association="DP_PortalModel.FK__USERS__USER_TYPE__300424B4" />
+        <EntityTypeShape EntityType="DP_PortalModel.APPOINTMENT" Width="1.5" PointX="5.25" PointY="1.375" />
+        <AssociationConnector Association="DP_PortalModel.FK__APPOINTME__DOCTO__33D4B598" />
+        <AssociationConnector Association="DP_PortalModel.FK__APPOINTME__PATIE__32E0915F" />
+        <EntityTypeShape EntityType="DP_PortalModel.APPOINTMENT_DETAILS" Width="1.5" PointX="7.5" PointY="8.25" />
+        <EntityTypeShape EntityType="DP_PortalModel.PATIENT_PRESCRPTIONS" Width="1.5" PointX="7.5" PointY="5.625" />
+        <AssociationConnector Association="DP_PortalModel.FK__APPOINTME__APPOI__36B12243" />
+        <AssociationConnector Association="DP_PortalModel.FK__PATIENT_P__APPOI__398D8EEE" />
+        <EntityTypeShape EntityType="DP_PortalModel.PATIENT_DETAILS" Width="1.5" PointX="5.25" PointY="5.625" />
+        <AssociationConnector Association="DP_PortalModel.FK__PATIENT_D__PATIE__3C69FB99" />
+        <EntityTypeShape EntityType="DP_PortalModel.SLOT" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="DP_PortalModel.ORGAN_DONORS" Width="1.5" PointX="7.375" PointY="0.75" />
+        <AssociationConnector Association="DP_PortalModel.FK__ORGAN_DON__ORGAN__45F365D3" />
+        <EntityTypeShape EntityType="DP_PortalModel.DOCTOR_SPEC" Width="1.5" PointX="5.25" PointY="8.875" />
+        <AssociationConnector Association="DP_PortalModel.FK__DOCTOR_SP__DOCTO__4BAC3F29" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

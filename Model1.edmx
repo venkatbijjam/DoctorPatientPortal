@@ -1,0 +1,640 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DP_PortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="APPOINTMENT_DETAILS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="APPOINTMENT_ID" Type="int" />
+          <Property Name="APPOINTMENT_STARTTIME" Type="int" Nullable="false" />
+          <Property Name="APPOINTMENT_ENDTIME" Type="int" Nullable="false" />
+          <Property Name="DISEASE_DETAILS" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="APPOINTMENTS">
+          <Key>
+            <PropertyRef Name="APPOINTMENT_ID" />
+          </Key>
+          <Property Name="APPOINTMENT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PATIENT_ID" Type="int" />
+          <Property Name="DOCTOR_ID" Type="int" />
+          <Property Name="APPOINTMENT_DATE" Type="datetime" Nullable="false" />
+          <Property Name="BOOKED_DATE" Type="datetime" Nullable="false" />
+          <Property Name="IS_ACTIVE" Type="bit" />
+          <Property Name="APPPOINMENT_STATUS" Type="bit" />
+        </EntityType>
+        <EntityType Name="DOCTOR_SPEC">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DOCTOR_ID" Type="int" />
+          <Property Name="DOCTOR_SPEC" Type="nvarchar" MaxLength="100" />
+          <Property Name="DOCTOR_ADDRESS" Type="varchar" MaxLength="100" />
+          <Property Name="DOCTOR_MCODE" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ORGAN_DONORS">
+          <Key>
+            <PropertyRef Name="ORGAN_DONOR_ID" />
+          </Key>
+          <Property Name="ORGAN_DONOR_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ORGAN_USER_ID" Type="int" />
+          <Property Name="ORGAN_DONOR_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="ORGAN_DONOR_CONTACT" Type="varchar" MaxLength="12" />
+          <Property Name="ORGAN_DONATING_ORGAN" Type="varchar" MaxLength="100" />
+          <Property Name="ORGAN_DONATION_SIGNED_DATE" Type="datetime" />
+          <Property Name="ORGAN_DONOR_ADDRESSS" Type="nvarchar" MaxLength="100" />
+          <Property Name="ORGAN_DONOR_EMAIL" Type="varchar" MaxLength="100" />
+          <Property Name="ORGAN_DONOR_RECORD_ACTIVE" Type="bit" />
+          <Property Name="UPDATE_DATE" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PATIENT_DETAILS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PATIENT_ID" Type="int" />
+          <Property Name="DATE_OF_BIRTH" Type="date" />
+          <Property Name="GENDER" Type="varchar" MaxLength="4" />
+          <Property Name="HEIGHT" Type="varchar" MaxLength="10" />
+          <Property Name="WEIGHT" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="PATIENT_PRESCRPTIONS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="APPOINTMENT_ID" Type="int" />
+          <Property Name="DRUG_NAME" Type="nvarchar" MaxLength="1000" />
+          <Property Name="DRUG_USAGE" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DP_Portal.dbo.SLOTS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SLOTS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="START_TIME" Type="int" />
+          <Property Name="END_TIME" Type="int" />
+        </EntityType>
+        <EntityType Name="USERS">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USER_NAME" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="EMAIL_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PASSWORD" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="FIRST_NAME" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LAST_NAME" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MOBILE" Type="int" />
+          <Property Name="USER_TYPE" Type="int" />
+          <Property Name="ISACTIVE" Type="bit" />
+        </EntityType>
+        <EntityType Name="USERS_TYPE">
+          <Key>
+            <PropertyRef Name="USER_TYPE_ID" />
+          </Key>
+          <Property Name="USER_TYPE_ID" Type="int" Nullable="false" />
+          <Property Name="USER_TYPE_NAME" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK__APPOINTME__APPOI__36B12243">
+          <End Role="APPOINTMENTS" Type="Self.APPOINTMENTS" Multiplicity="0..1" />
+          <End Role="APPOINTMENT_DETAILS" Type="Self.APPOINTMENT_DETAILS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APPOINTMENTS">
+              <PropertyRef Name="APPOINTMENT_ID" />
+            </Principal>
+            <Dependent Role="APPOINTMENT_DETAILS">
+              <PropertyRef Name="APPOINTMENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__APPOINTME__DOCTO__33D4B598">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
+          <End Role="APPOINTMENTS" Type="Self.APPOINTMENTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="APPOINTMENTS">
+              <PropertyRef Name="DOCTOR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__APPOINTME__PATIE__32E0915F">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
+          <End Role="APPOINTMENTS" Type="Self.APPOINTMENTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="APPOINTMENTS">
+              <PropertyRef Name="PATIENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DOCTOR_SP__DOCTO__4BAC3F29">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
+          <End Role="DOCTOR_SPEC" Type="Self.DOCTOR_SPEC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="DOCTOR_SPEC">
+              <PropertyRef Name="DOCTOR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ORGAN_DON__ORGAN__45F365D3">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
+          <End Role="ORGAN_DONORS" Type="Self.ORGAN_DONORS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="ORGAN_DONORS">
+              <PropertyRef Name="ORGAN_USER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PATIENT_D__PATIE__3C69FB99">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
+          <End Role="PATIENT_DETAILS" Type="Self.PATIENT_DETAILS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="PATIENT_DETAILS">
+              <PropertyRef Name="PATIENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PATIENT_P__APPOI__398D8EEE">
+          <End Role="APPOINTMENTS" Type="Self.APPOINTMENTS" Multiplicity="0..1" />
+          <End Role="PATIENT_PRESCRPTIONS" Type="Self.PATIENT_PRESCRPTIONS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APPOINTMENTS">
+              <PropertyRef Name="APPOINTMENT_ID" />
+            </Principal>
+            <Dependent Role="PATIENT_PRESCRPTIONS">
+              <PropertyRef Name="APPOINTMENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USERS__USER_TYPE__300424B4">
+          <End Role="USERS_TYPE" Type="Self.USERS_TYPE" Multiplicity="0..1" />
+          <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS_TYPE">
+              <PropertyRef Name="USER_TYPE_ID" />
+            </Principal>
+            <Dependent Role="USERS">
+              <PropertyRef Name="USER_TYPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DP_PortalModelStoreContainer">
+          <EntitySet Name="APPOINTMENT_DETAILS" EntityType="Self.APPOINTMENT_DETAILS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="APPOINTMENTS" EntityType="Self.APPOINTMENTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DOCTOR_SPEC" EntityType="Self.DOCTOR_SPEC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ORGAN_DONORS" EntityType="Self.ORGAN_DONORS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PATIENT_DETAILS" EntityType="Self.PATIENT_DETAILS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PATIENT_PRESCRPTIONS" EntityType="Self.PATIENT_PRESCRPTIONS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERS_TYPE" EntityType="Self.USERS_TYPE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SLOTS" EntityType="Self.SLOTS" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SLOTS].[ID] AS [ID], 
+    [SLOTS].[START_TIME] AS [START_TIME], 
+    [SLOTS].[END_TIME] AS [END_TIME]
+    FROM [dbo].[SLOTS] AS [SLOTS]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__APPOINTME__APPOI__36B12243" Association="Self.FK__APPOINTME__APPOI__36B12243">
+            <End Role="APPOINTMENTS" EntitySet="APPOINTMENTS" />
+            <End Role="APPOINTMENT_DETAILS" EntitySet="APPOINTMENT_DETAILS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__APPOINTME__DOCTO__33D4B598" Association="Self.FK__APPOINTME__DOCTO__33D4B598">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="APPOINTMENTS" EntitySet="APPOINTMENTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__APPOINTME__PATIE__32E0915F" Association="Self.FK__APPOINTME__PATIE__32E0915F">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="APPOINTMENTS" EntitySet="APPOINTMENTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DOCTOR_SP__DOCTO__4BAC3F29" Association="Self.FK__DOCTOR_SP__DOCTO__4BAC3F29">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="DOCTOR_SPEC" EntitySet="DOCTOR_SPEC" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ORGAN_DON__ORGAN__45F365D3" Association="Self.FK__ORGAN_DON__ORGAN__45F365D3">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="ORGAN_DONORS" EntitySet="ORGAN_DONORS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PATIENT_D__PATIE__3C69FB99" Association="Self.FK__PATIENT_D__PATIE__3C69FB99">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="PATIENT_DETAILS" EntitySet="PATIENT_DETAILS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PATIENT_P__APPOI__398D8EEE" Association="Self.FK__PATIENT_P__APPOI__398D8EEE">
+            <End Role="APPOINTMENTS" EntitySet="APPOINTMENTS" />
+            <End Role="PATIENT_PRESCRPTIONS" EntitySet="PATIENT_PRESCRPTIONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USERS__USER_TYPE__300424B4" Association="Self.FK__USERS__USER_TYPE__300424B4">
+            <End Role="USERS_TYPE" EntitySet="USERS_TYPE" />
+            <End Role="USERS" EntitySet="USERS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DP_PortalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DP_PortalEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="USERS" EntityType="DP_PortalModel.USER" />
+          <EntitySet Name="USERS_TYPE" EntityType="DP_PortalModel.USERS_TYPE" />
+          <AssociationSet Name="FK__USERS__USER_TYPE__300424B4" Association="DP_PortalModel.FK__USERS__USER_TYPE__300424B4">
+            <End Role="USERS_TYPE" EntitySet="USERS_TYPE" />
+            <End Role="USER" EntitySet="USERS" />
+          </AssociationSet>
+          <EntitySet Name="APPOINTMENTS" EntityType="DP_PortalModel.APPOINTMENT" />
+          <AssociationSet Name="FK__APPOINTME__DOCTO__33D4B598" Association="DP_PortalModel.FK__APPOINTME__DOCTO__33D4B598">
+            <End Role="USER" EntitySet="USERS" />
+            <End Role="APPOINTMENT" EntitySet="APPOINTMENTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__APPOINTME__PATIE__32E0915F" Association="DP_PortalModel.FK__APPOINTME__PATIE__32E0915F">
+            <End Role="USER" EntitySet="USERS" />
+            <End Role="APPOINTMENT" EntitySet="APPOINTMENTS" />
+          </AssociationSet>
+          <EntitySet Name="APPOINTMENT_DETAILS" EntityType="DP_PortalModel.APPOINTMENT_DETAILS" />
+          <EntitySet Name="PATIENT_PRESCRPTIONS" EntityType="DP_PortalModel.PATIENT_PRESCRPTIONS" />
+          <AssociationSet Name="FK__APPOINTME__APPOI__36B12243" Association="DP_PortalModel.FK__APPOINTME__APPOI__36B12243">
+            <End Role="APPOINTMENT" EntitySet="APPOINTMENTS" />
+            <End Role="APPOINTMENT_DETAILS" EntitySet="APPOINTMENT_DETAILS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PATIENT_P__APPOI__398D8EEE" Association="DP_PortalModel.FK__PATIENT_P__APPOI__398D8EEE">
+            <End Role="APPOINTMENT" EntitySet="APPOINTMENTS" />
+            <End Role="PATIENT_PRESCRPTIONS" EntitySet="PATIENT_PRESCRPTIONS" />
+          </AssociationSet>
+          <EntitySet Name="PATIENT_DETAILS" EntityType="DP_PortalModel.PATIENT_DETAILS" />
+          <AssociationSet Name="FK__PATIENT_D__PATIE__3C69FB99" Association="DP_PortalModel.FK__PATIENT_D__PATIE__3C69FB99">
+            <End Role="USER" EntitySet="USERS" />
+            <End Role="PATIENT_DETAILS" EntitySet="PATIENT_DETAILS" />
+          </AssociationSet>
+          <EntitySet Name="SLOTS" EntityType="DP_PortalModel.SLOT" />
+          <EntitySet Name="ORGAN_DONORS" EntityType="DP_PortalModel.ORGAN_DONORS" />
+          <AssociationSet Name="FK__ORGAN_DON__ORGAN__45F365D3" Association="DP_PortalModel.FK__ORGAN_DON__ORGAN__45F365D3">
+            <End Role="USER" EntitySet="USERS" />
+            <End Role="ORGAN_DONORS" EntitySet="ORGAN_DONORS" />
+          </AssociationSet>
+          <EntitySet Name="DOCTOR_SPEC" EntityType="DP_PortalModel.DOCTOR_SPEC" />
+          <AssociationSet Name="FK__DOCTOR_SP__DOCTO__4BAC3F29" Association="DP_PortalModel.FK__DOCTOR_SP__DOCTO__4BAC3F29">
+            <End Role="USER" EntitySet="USERS" />
+            <End Role="DOCTOR_SPEC" EntitySet="DOCTOR_SPEC" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USER_NAME" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PASSWORD" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="FIRST_NAME" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LAST_NAME" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MOBILE" Type="Int32" />
+          <Property Name="USER_TYPE" Type="Int32" />
+          <Property Name="ISACTIVE" Type="Boolean" />
+          <NavigationProperty Name="USERS_TYPE" Relationship="DP_PortalModel.FK__USERS__USER_TYPE__300424B4" FromRole="USER" ToRole="USERS_TYPE" />
+          <NavigationProperty Name="APPOINTMENTS" Relationship="DP_PortalModel.FK__APPOINTME__DOCTO__33D4B598" FromRole="USER" ToRole="APPOINTMENT" />
+          <NavigationProperty Name="APPOINTMENTS1" Relationship="DP_PortalModel.FK__APPOINTME__PATIE__32E0915F" FromRole="USER" ToRole="APPOINTMENT" />
+          <NavigationProperty Name="PATIENT_DETAILS" Relationship="DP_PortalModel.FK__PATIENT_D__PATIE__3C69FB99" FromRole="USER" ToRole="PATIENT_DETAILS" />
+          <NavigationProperty Name="ORGAN_DONORS" Relationship="DP_PortalModel.FK__ORGAN_DON__ORGAN__45F365D3" FromRole="USER" ToRole="ORGAN_DONORS" />
+          <NavigationProperty Name="DOCTOR_SPEC" Relationship="DP_PortalModel.FK__DOCTOR_SP__DOCTO__4BAC3F29" FromRole="USER" ToRole="DOCTOR_SPEC" />
+        </EntityType>
+        <EntityType Name="USERS_TYPE">
+          <Key>
+            <PropertyRef Name="USER_TYPE_ID" />
+          </Key>
+          <Property Name="USER_TYPE_ID" Type="Int32" Nullable="false" />
+          <Property Name="USER_TYPE_NAME" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USERS" Relationship="DP_PortalModel.FK__USERS__USER_TYPE__300424B4" FromRole="USERS_TYPE" ToRole="USER" />
+        </EntityType>
+        <Association Name="FK__USERS__USER_TYPE__300424B4">
+          <End Type="DP_PortalModel.USERS_TYPE" Role="USERS_TYPE" Multiplicity="0..1" />
+          <End Type="DP_PortalModel.USER" Role="USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS_TYPE">
+              <PropertyRef Name="USER_TYPE_ID" />
+            </Principal>
+            <Dependent Role="USER">
+              <PropertyRef Name="USER_TYPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="APPOINTMENT">
+          <Key>
+            <PropertyRef Name="APPOINTMENT_ID" />
+          </Key>
+          <Property Name="APPOINTMENT_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PATIENT_ID" Type="Int32" />
+          <Property Name="DOCTOR_ID" Type="Int32" />
+          <Property Name="APPOINTMENT_DATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BOOKED_DATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IS_ACTIVE" Type="Boolean" />
+          <NavigationProperty Name="USER" Relationship="DP_PortalModel.FK__APPOINTME__DOCTO__33D4B598" FromRole="APPOINTMENT" ToRole="USER" />
+          <NavigationProperty Name="USER1" Relationship="DP_PortalModel.FK__APPOINTME__PATIE__32E0915F" FromRole="APPOINTMENT" ToRole="USER" />
+          <NavigationProperty Name="APPOINTMENT_DETAILS" Relationship="DP_PortalModel.FK__APPOINTME__APPOI__36B12243" FromRole="APPOINTMENT" ToRole="APPOINTMENT_DETAILS" />
+          <NavigationProperty Name="PATIENT_PRESCRPTIONS" Relationship="DP_PortalModel.FK__PATIENT_P__APPOI__398D8EEE" FromRole="APPOINTMENT" ToRole="PATIENT_PRESCRPTIONS" />
+          <Property Name="APPPOINMENT_STATUS" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK__APPOINTME__DOCTO__33D4B598">
+          <End Type="DP_PortalModel.USER" Role="USER" Multiplicity="0..1" />
+          <End Type="DP_PortalModel.APPOINTMENT" Role="APPOINTMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="APPOINTMENT">
+              <PropertyRef Name="DOCTOR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__APPOINTME__PATIE__32E0915F">
+          <End Type="DP_PortalModel.USER" Role="USER" Multiplicity="0..1" />
+          <End Type="DP_PortalModel.APPOINTMENT" Role="APPOINTMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="APPOINTMENT">
+              <PropertyRef Name="PATIENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="APPOINTMENT_DETAILS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="APPOINTMENT_ID" Type="Int32" />
+          <Property Name="APPOINTMENT_STARTTIME" Type="Int32" Nullable="false" />
+          <Property Name="APPOINTMENT_ENDTIME" Type="Int32" Nullable="false" />
+          <Property Name="DISEASE_DETAILS" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="APPOINTMENT" Relationship="DP_PortalModel.FK__APPOINTME__APPOI__36B12243" FromRole="APPOINTMENT_DETAILS" ToRole="APPOINTMENT" />
+        </EntityType>
+        <EntityType Name="PATIENT_PRESCRPTIONS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="APPOINTMENT_ID" Type="Int32" />
+          <Property Name="DRUG_NAME" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="DRUG_USAGE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="APPOINTMENT" Relationship="DP_PortalModel.FK__PATIENT_P__APPOI__398D8EEE" FromRole="PATIENT_PRESCRPTIONS" ToRole="APPOINTMENT" />
+        </EntityType>
+        <Association Name="FK__APPOINTME__APPOI__36B12243">
+          <End Type="DP_PortalModel.APPOINTMENT" Role="APPOINTMENT" Multiplicity="0..1" />
+          <End Type="DP_PortalModel.APPOINTMENT_DETAILS" Role="APPOINTMENT_DETAILS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APPOINTMENT">
+              <PropertyRef Name="APPOINTMENT_ID" />
+            </Principal>
+            <Dependent Role="APPOINTMENT_DETAILS">
+              <PropertyRef Name="APPOINTMENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PATIENT_P__APPOI__398D8EEE">
+          <End Type="DP_PortalModel.APPOINTMENT" Role="APPOINTMENT" Multiplicity="0..1" />
+          <End Type="DP_PortalModel.PATIENT_PRESCRPTIONS" Role="PATIENT_PRESCRPTIONS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APPOINTMENT">
+              <PropertyRef Name="APPOINTMENT_ID" />
+            </Principal>
+            <Dependent Role="PATIENT_PRESCRPTIONS">
+              <PropertyRef Name="APPOINTMENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PATIENT_DETAILS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PATIENT_ID" Type="Int32" />
+          <Property Name="DATE_OF_BIRTH" Type="DateTime" Precision="0" />
+          <Property Name="GENDER" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="HEIGHT" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="WEIGHT" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USER" Relationship="DP_PortalModel.FK__PATIENT_D__PATIE__3C69FB99" FromRole="PATIENT_DETAILS" ToRole="USER" />
+        </EntityType>
+        <Association Name="FK__PATIENT_D__PATIE__3C69FB99">
+          <End Type="DP_PortalModel.USER" Role="USER" Multiplicity="0..1" />
+          <End Type="DP_PortalModel.PATIENT_DETAILS" Role="PATIENT_DETAILS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="PATIENT_DETAILS">
+              <PropertyRef Name="PATIENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SLOT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="START_TIME" Type="Int32" />
+          <Property Name="END_TIME" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ORGAN_DONORS">
+          <Key>
+            <PropertyRef Name="ORGAN_DONOR_ID" />
+          </Key>
+          <Property Name="ORGAN_DONOR_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ORGAN_DONOR_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ORGAN_DONOR_CONTACT" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="ORGAN_DONATING_ORGAN" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ORGAN_DONATION_SIGNED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="ORGAN_DONOR_ADDRESSS" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ORGAN_DONOR_EMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ORGAN_DONOR_RECORD_ACTIVE" Type="Boolean" />
+          <Property Name="UPDATE_DATE" Type="DateTime" Precision="3" />
+          <Property Name="ORGAN_USER_ID" Type="Int32" />
+          <NavigationProperty Name="USER" Relationship="DP_PortalModel.FK__ORGAN_DON__ORGAN__45F365D3" FromRole="ORGAN_DONORS" ToRole="USER" />
+        </EntityType>
+        <Association Name="FK__ORGAN_DON__ORGAN__45F365D3">
+          <End Type="DP_PortalModel.USER" Role="USER" Multiplicity="0..1" />
+          <End Type="DP_PortalModel.ORGAN_DONORS" Role="ORGAN_DONORS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="ORGAN_DONORS">
+              <PropertyRef Name="ORGAN_USER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DOCTOR_SPEC">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DOCTOR_ID" Type="Int32" />
+          <Property Name="DOCTOR_SPEC1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DOCTOR_ADDRESS" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DOCTOR_MCODE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USER" Relationship="DP_PortalModel.FK__DOCTOR_SP__DOCTO__4BAC3F29" FromRole="DOCTOR_SPEC" ToRole="USER" />
+        </EntityType>
+        <Association Name="FK__DOCTOR_SP__DOCTO__4BAC3F29">
+          <End Type="DP_PortalModel.USER" Role="USER" Multiplicity="0..1" />
+          <End Type="DP_PortalModel.DOCTOR_SPEC" Role="DOCTOR_SPEC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="USER_ID" />
+            </Principal>
+            <Dependent Role="DOCTOR_SPEC">
+              <PropertyRef Name="DOCTOR_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DP_PortalModelStoreContainer" CdmEntityContainer="DP_PortalEntities" >
+          <EntitySetMapping Name="USERS">
+            <EntityTypeMapping TypeName="DP_PortalModel.USER">
+              <MappingFragment StoreEntitySet="USERS">
+                <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
+                <ScalarProperty Name="USER_TYPE" ColumnName="USER_TYPE" />
+                <ScalarProperty Name="MOBILE" ColumnName="MOBILE" />
+                <ScalarProperty Name="LAST_NAME" ColumnName="LAST_NAME" />
+                <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="EMAIL_ID" ColumnName="EMAIL_ID" />
+                <ScalarProperty Name="USER_NAME" ColumnName="USER_NAME" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERS_TYPE">
+            <EntityTypeMapping TypeName="DP_PortalModel.USERS_TYPE">
+              <MappingFragment StoreEntitySet="USERS_TYPE">
+                <ScalarProperty Name="USER_TYPE_NAME" ColumnName="USER_TYPE_NAME" />
+                <ScalarProperty Name="USER_TYPE_ID" ColumnName="USER_TYPE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="APPOINTMENTS">
+            <EntityTypeMapping TypeName="DP_PortalModel.APPOINTMENT">
+              <MappingFragment StoreEntitySet="APPOINTMENTS">
+                <ScalarProperty Name="APPPOINMENT_STATUS" ColumnName="APPPOINMENT_STATUS" />
+                <ScalarProperty Name="IS_ACTIVE" ColumnName="IS_ACTIVE" />
+                <ScalarProperty Name="BOOKED_DATE" ColumnName="BOOKED_DATE" />
+                <ScalarProperty Name="APPOINTMENT_DATE" ColumnName="APPOINTMENT_DATE" />
+                <ScalarProperty Name="DOCTOR_ID" ColumnName="DOCTOR_ID" />
+                <ScalarProperty Name="PATIENT_ID" ColumnName="PATIENT_ID" />
+                <ScalarProperty Name="APPOINTMENT_ID" ColumnName="APPOINTMENT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="APPOINTMENT_DETAILS">
+            <EntityTypeMapping TypeName="DP_PortalModel.APPOINTMENT_DETAILS">
+              <MappingFragment StoreEntitySet="APPOINTMENT_DETAILS">
+                <ScalarProperty Name="DISEASE_DETAILS" ColumnName="DISEASE_DETAILS" />
+                <ScalarProperty Name="APPOINTMENT_ENDTIME" ColumnName="APPOINTMENT_ENDTIME" />
+                <ScalarProperty Name="APPOINTMENT_STARTTIME" ColumnName="APPOINTMENT_STARTTIME" />
+                <ScalarProperty Name="APPOINTMENT_ID" ColumnName="APPOINTMENT_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PATIENT_PRESCRPTIONS">
+            <EntityTypeMapping TypeName="DP_PortalModel.PATIENT_PRESCRPTIONS">
+              <MappingFragment StoreEntitySet="PATIENT_PRESCRPTIONS">
+                <ScalarProperty Name="DRUG_USAGE" ColumnName="DRUG_USAGE" />
+                <ScalarProperty Name="DRUG_NAME" ColumnName="DRUG_NAME" />
+                <ScalarProperty Name="APPOINTMENT_ID" ColumnName="APPOINTMENT_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PATIENT_DETAILS">
+            <EntityTypeMapping TypeName="DP_PortalModel.PATIENT_DETAILS">
+              <MappingFragment StoreEntitySet="PATIENT_DETAILS">
+                <ScalarProperty Name="WEIGHT" ColumnName="WEIGHT" />
+                <ScalarProperty Name="HEIGHT" ColumnName="HEIGHT" />
+                <ScalarProperty Name="GENDER" ColumnName="GENDER" />
+                <ScalarProperty Name="DATE_OF_BIRTH" ColumnName="DATE_OF_BIRTH" />
+                <ScalarProperty Name="PATIENT_ID" ColumnName="PATIENT_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SLOTS">
+            <EntityTypeMapping TypeName="DP_PortalModel.SLOT">
+              <MappingFragment StoreEntitySet="SLOTS">
+                <ScalarProperty Name="END_TIME" ColumnName="END_TIME" />
+                <ScalarProperty Name="START_TIME" ColumnName="START_TIME" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORGAN_DONORS">
+            <EntityTypeMapping TypeName="DP_PortalModel.ORGAN_DONORS">
+              <MappingFragment StoreEntitySet="ORGAN_DONORS">
+                <ScalarProperty Name="ORGAN_USER_ID" ColumnName="ORGAN_USER_ID" />
+                <ScalarProperty Name="UPDATE_DATE" ColumnName="UPDATE_DATE" />
+                <ScalarProperty Name="ORGAN_DONOR_RECORD_ACTIVE" ColumnName="ORGAN_DONOR_RECORD_ACTIVE" />
+                <ScalarProperty Name="ORGAN_DONOR_EMAIL" ColumnName="ORGAN_DONOR_EMAIL" />
+                <ScalarProperty Name="ORGAN_DONOR_ADDRESSS" ColumnName="ORGAN_DONOR_ADDRESSS" />
+                <ScalarProperty Name="ORGAN_DONATION_SIGNED_DATE" ColumnName="ORGAN_DONATION_SIGNED_DATE" />
+                <ScalarProperty Name="ORGAN_DONATING_ORGAN" ColumnName="ORGAN_DONATING_ORGAN" />
+                <ScalarProperty Name="ORGAN_DONOR_CONTACT" ColumnName="ORGAN_DONOR_CONTACT" />
+                <ScalarProperty Name="ORGAN_DONOR_NAME" ColumnName="ORGAN_DONOR_NAME" />
+                <ScalarProperty Name="ORGAN_DONOR_ID" ColumnName="ORGAN_DONOR_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCTOR_SPEC">
+            <EntityTypeMapping TypeName="DP_PortalModel.DOCTOR_SPEC">
+              <MappingFragment StoreEntitySet="DOCTOR_SPEC">
+                <ScalarProperty Name="DOCTOR_MCODE" ColumnName="DOCTOR_MCODE" />
+                <ScalarProperty Name="DOCTOR_ADDRESS" ColumnName="DOCTOR_ADDRESS" />
+                <ScalarProperty Name="DOCTOR_SPEC1" ColumnName="DOCTOR_SPEC" />
+                <ScalarProperty Name="DOCTOR_ID" ColumnName="DOCTOR_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
