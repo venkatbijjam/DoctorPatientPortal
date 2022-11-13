@@ -1,0 +1,145 @@
+﻿@model DP_Portal.Models.Patient_Dashboard
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+        <div class="panel panel-primary">
+            <!-- Default panel contents -->
+            <div class="panel-heading" style="text-align:center"><h2>Patient Dashboard</h2></div>
+            <div class="panel-body">
+               
+
+            
+
+            <div class="row">
+                <div class="col-md-10">
+                    <h2>Patient Info</h2>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group ">
+                        <input type="submit"
+                               value="Edit info"
+                               class="btn btn-danger form-control"
+                               onclick="location.href=' @Url.Action("patientInfoUpdate", "Patient",new { id = Model.user_id }, null)'" />
+
+
+                    </div>
+                </div>
+            </div>
+
+            <table class="table table-striped">
+
+                <tbody>
+
+                    <tr>
+                        <th scope="row">Patient First Name</th>
+                        <td> @Model.Patient_FIRST_NAME</td>
+
+                        <th scope="row">Patient Last Name</th>
+                        <td>@Model.patient_LAST_NAME </td>
+
+
+                    </tr>
+
+                    <tr>
+                        <th scope="row">Patient User Id</th>
+                        <td> @Model.user_id</td>
+
+                        <th scope="row">Patient User Name</th>
+                        <td>@Model.user_name </td>
+
+
+                    </tr>
+                    <tr>
+                        <th scope="row">Patient Email</th>
+                        <td>@Model.EMAIL_ID</td>
+                        <th scope="row">Patient Mobile</th>
+                        <td>@Model.Patient_Mobile_Number</td>
+
+
+                    </tr>
+                    <tr>
+                        <th scope="row">Patient Gender</th>
+                        <td>@Model.gender</td>
+                        <th scope="row">Patient Data Of Birth</th>
+                        <td>@Model.Date_of_Birth</td>
+
+
+                    </tr>
+                    <tr>
+                        <th scope="row">Patient Height</th>
+                        <td>@Model.height</td>
+                        <th scope="row">Patient Weight</th>
+                        <td>@Model.weight</td>
+
+
+                    </tr>
+
+
+
+
+                </tbody>
+            </table>
+            <hr />
+            <h2>Appointment Details</h2>
+            @if (Model.ls_appoinments.Count() == 0)
+            {
+                <table class="table table-striped">
+
+                    <tbody>
+
+                        <tr>
+                            <td align="center"><h3>No Active Appointments</h3></td>
+                        </tr>
+                    </tbody>
+                </table>
+            }
+            @if (Model.ls_appoinments.Count() > 0)
+            {
+
+                <table class="table">
+                    <tr>
+                        <th>
+                            Appointment ID
+                        </th>
+                        <th>
+                            Appoinment Date
+                        </th>
+
+                        <th>
+                            Consulting Doctor
+                        </th>
+
+                        <th> Consulting Time</th>
+                    </tr>
+
+                    @foreach (var item in Model.ls_appoinments)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.APPOINTMENT_ID)
+                            </td>
+                            <td>
+
+                                @item.APPOINTMENT_DATE.ToShortDateString()
+                            </td>
+
+                            <td>
+                                Dr. @Html.DisplayFor(modelItem => item.USER.LAST_NAME)
+                            </td>
+                            <td>
+                                @item.APPOINTMENT_DETAILS.Select(a => a.APPOINTMENT_STARTTIME).FirstOrDefault() ~  @item.APPOINTMENT_DETAILS.Select(a => a.APPOINTMENT_ENDTIME).FirstOrDefault()
+                            </td>
+
+
+
+                        </tr>
+                    }
+
+                </table>
+            }
+            </div>
+        </div>

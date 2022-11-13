@@ -1,0 +1,99 @@
+﻿@model IEnumerable<DP_Portal.ORGAN_DONORS>
+
+@{
+    ViewBag.Title = "OrganDonationList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="panel panel-primary">
+    <!-- Default panel contents -->
+    <div class="panel-heading" style="text-align:center">
+        <h2>My Organ Donation List</h2>
+    </div>
+    <div class="panel-body">
+
+        <div class="row">
+            <div class="col-md-12 mb-12">
+                <div class="form-group ">
+                    <input type="submit"
+                           value="Signup for Organ Donor"
+                           class="btn btn-success form-control"
+                           onclick="location.href=' @Url.Action("OrganDonationCreate", "Patient" )'" />
+
+
+                </div>
+            </div>
+        </div>
+        <table class="table">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Contact
+                </th>
+                <th>
+                    Donating Organ
+                </th>
+                <th>
+                    Signed Date
+                </th>
+                <th>
+                    Address
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Status
+                </th>
+
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ORGAN_DONOR_NAME)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ORGAN_DONOR_CONTACT)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ORGAN_DONATING_ORGAN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ORGAN_DONATION_SIGNED_DATE)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ORGAN_DONOR_ADDRESSS)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ORGAN_DONOR_EMAIL)
+                    </td>
+
+                    @if (item.ORGAN_DONOR_RECORD_ACTIVE == true)
+                    {
+                        <td> Enrolled</td>
+                    }
+                    else
+                    {
+                        <td> Not Enrolled</td>
+                    }
+
+                    <td>
+                        @Html.ActionLink("Edit", "OrganDonationEdit", new { id = item.ORGAN_DONOR_ID }) |
+
+                        @Html.ActionLink("Opt Out", "OrganDonationOptOut", new { id = item.ORGAN_DONOR_ID })
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+</div>

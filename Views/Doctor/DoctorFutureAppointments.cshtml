@@ -1,0 +1,82 @@
+﻿@model IEnumerable<DP_Portal.APPOINTMENT>
+
+@{
+    ViewBag.Title = "DoctorFutureAppointments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="panel panel-primary">
+    <!-- Default panel contents -->
+    <div class="panel-heading" style="text-align:center">
+        <h2>Future Appointments</h2>
+    </div>
+    <div class="panel-body">
+        <table class="table">
+            <tr>
+                <th>
+                    Appointment Date
+                </th>
+                <th>
+                    Slot Time
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Doctor Name
+                </th>
+                <th>
+                    Patient Name
+                </th>
+                <th>
+                    Appointment Status
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.APPOINTMENT_DATE.ToShortDateString()
+                    </td>
+                    <td>
+                        @item.APPOINTMENT_DETAILS.FirstOrDefault().APPOINTMENT_STARTTIME ~ @item.APPOINTMENT_DETAILS.FirstOrDefault().APPOINTMENT_ENDTIME
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IS_ACTIVE)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.USER.USER_NAME)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.USER1.USER_NAME)
+                    </td>
+                    @if (item.APPPOINMENT_STATUS == false)
+                    {
+                        <td>
+                            Not Yet Completed
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            Completed
+                        </td>
+                    }
+
+                    <td>
+
+                        @Html.ActionLink("Details", "Details", new { Appointment_id = item.APPOINTMENT_ID })
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+
+
+    </div>
+</div>

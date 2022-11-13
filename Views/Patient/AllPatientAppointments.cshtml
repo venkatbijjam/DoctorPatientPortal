@@ -1,0 +1,127 @@
+﻿
+@{
+    ViewBag.Title = "AllPatientAppointments";
+
+}
+
+@model IEnumerable<DP_Portal.APPOINTMENT>
+
+
+
+
+
+
+<div class="panel panel-primary">
+    <!-- Default panel contents -->
+    <div class="panel-heading" style="text-align:center"><h2>All Appointments</h2></div>
+    <div class="panel-body">
+
+        <div class="row">
+            <div class="col-md-12 mb-12">
+                <div class="form-group ">
+                    <input type="submit"
+                           value="Book an Appointment"
+                           class="btn btn-success form-control"
+                           onclick="location.href=' @Url.Action("Create", "Patient" )'" />
+
+
+                </div>
+            </div>
+        </div>
+        <table class="table table-striped">
+            <tr>
+                <th>
+
+                    Appointment Date
+                </th>
+                <th>
+
+                    Booked Date
+                </th>
+
+                <th>
+                    Consulting Doctor
+                </th>
+                <th>
+                    Doctor Specilization
+
+                </th>
+                <th>
+                    Appointment Status
+                </th>
+                <th>
+                    Status
+                </th>
+                <th></th>
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.APPOINTMENT_DATE.ToShortDateString()
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BOOKED_DATE)
+
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.USER.USER_NAME)
+                    </td>
+                    <td>
+
+                        @item.USER.DOCTOR_SPEC.Select(a => a.DOCTOR_SPEC1).FirstOrDefault()
+                    </td>
+
+
+                    @if (item.APPPOINMENT_STATUS == false)
+                    {
+
+
+                        <td>Not Yet Started </td>
+                    }
+                    else
+                    {
+                        <td>Completed </td>
+                    }
+
+
+
+                    @if (item.IS_ACTIVE == true)
+                    {
+                        <td>Active </td>
+                    }
+                    else
+                    {
+
+                        <td>Cancelled </td>
+                    }
+
+
+                    <td>
+                        @if (item.APPPOINMENT_STATUS == true)
+                        {
+
+                            @Html.ActionLink("Details", "Details", "Doctor", new { Appointment_id = item.APPOINTMENT_ID }, null)
+                        }
+                        else
+                        {
+                            if (item.IS_ACTIVE == true)
+                            {
+                                @Html.ActionLink("Cancel Appointment", "Cancel", "Patient", new { Appointment_id = item.APPOINTMENT_ID }, null)
+
+                            }
+                        }
+                    </td>
+
+
+                </tr>
+            }
+
+        </table>
+
+
+    </div>
+</div>

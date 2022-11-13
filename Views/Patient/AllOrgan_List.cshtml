@@ -1,0 +1,91 @@
+﻿@model IEnumerable<DP_Portal.ORGAN_DONORS>
+
+@{
+    ViewBag.Title = "OrganDonationList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="panel panel-primary">
+    <!-- Default panel contents -->
+    <div class="panel-heading" style="text-align:center"><h2>All Organ Donation List</h2></div>
+    <div class="panel-body">
+        
+
+        @using (Html.BeginForm())
+        {
+            <p>
+                Search: @Html.TextBox("SearchString")
+                <input type="submit" value="Search" class="btn btn-success"/>
+            </p>
+
+
+        }
+
+        <table class="table">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Contact
+                </th>
+                <th>
+                    Donating Organ
+                </th>
+                <th>
+                    Signed Date
+                </th>
+                <th>
+                    Address
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Status
+                </th>
+
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ORGAN_DONOR_NAME)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ORGAN_DONOR_CONTACT)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ORGAN_DONATING_ORGAN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ORGAN_DONATION_SIGNED_DATE)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ORGAN_DONOR_ADDRESSS)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ORGAN_DONOR_EMAIL)
+                    </td>
+
+                    @if (item.ORGAN_DONOR_RECORD_ACTIVE == true)
+                    {
+                        <td> Available</td>
+                    }
+                    else
+                    {
+                        <td> Not Available</td>
+                    }
+
+
+                </tr>
+            }
+
+        </table>
+
+
+    </div>
+</div>

@@ -1,0 +1,85 @@
+﻿@model DP_Portal.Models.DoctorInfo
+
+@{
+    ViewBag.Title = "DoctorInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="panel panel-primary">
+    <!-- Default panel contents -->
+    <div class="panel-heading" style="text-align:center"><h2>My Information</h2></div>
+    <div class="panel-body">
+        
+
+        <div class="row">
+            <div class="col-md-10">
+                &nbsp;
+            </div>
+            <div class="col-md-2">
+                <div class="form-group ">
+                    <input type="submit"
+                           value="Edit info"
+                           class="btn btn-danger form-control"
+                           onclick="location.href=' @Url.Action("DoctorInfoEdit", "Doctor",new { id = Model.user_id }, null)'" />
+
+
+                </div>
+            </div>
+        </div>
+
+        <table class="table table-striped">
+
+            <tbody>
+
+                <tr>
+                    <th scope="row">First Name</th>
+                    <td> @Model.FIRST_NAME</td>
+
+                    <th scope="row">Last Name</th>
+                    <td>@Model.LAST_NAME </td>
+
+
+                </tr>
+
+                <tr>
+                    <th scope="row">User Id</th>
+                    <td> @Model.user_id</td>
+
+                    <th scope="row"> User Name</th>
+                    <td>@Model.user_name </td>
+
+
+                </tr>
+                <tr>
+                    <th scope="row"> Email</th>
+                    <td>@Model.EMAIL_ID</td>
+                    <th scope="row"> Mobile</th>
+                    <td>@Model.Mobile_Number</td>
+
+
+                </tr>
+                <tr>
+                    <th scope="row">Doctor MCODE</th>
+                    <td>@Model.Mcode</td>
+                    <th scope="row">Specality</th>
+                    <td>@Model.Specality</td>
+
+
+                </tr>
+                <tr>
+                    <th scope="row">Addresss </th>
+                    <td>@Model.address</td>
+
+
+
+                </tr>
+
+
+
+
+            </tbody>
+        </table>
+
+    </div></div>

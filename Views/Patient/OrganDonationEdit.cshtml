@@ -1,0 +1,108 @@
+﻿@model DP_Portal.ORGAN_DONORS
+
+@{
+    ViewBag.Title = "OrganDonationEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="panel panel-primary">
+    <!-- Default panel contents -->
+    <div class="panel-heading" style="text-align:center"><h2>Organ Donation Edit</h2></div>
+    <div class="panel-body">
+        
+
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ORGAN_DONOR_ID)
+
+                <div class="form-group">
+                    <div class="col-md-2 control-label ">
+                        <b>Donor Name</b>
+                    </div>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ORGAN_DONOR_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ORGAN_DONOR_NAME, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-2 control-label ">
+                        <b>Donor Contact</b>
+                    </div>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ORGAN_DONOR_CONTACT, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ORGAN_DONOR_CONTACT, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-2 control-label ">
+                        <b>Donating Organ</b>
+                    </div>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ORGAN_DONATING_ORGAN, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ORGAN_DONATING_ORGAN, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+                    <div class="col-md-2 control-label ">
+                        <b>Signed Date</b>
+                    </div>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ORGAN_DONATION_SIGNED_DATE, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.ORGAN_DONATION_SIGNED_DATE, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-2 control-label ">
+                        <b>Donor Address</b>
+                    </div>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ORGAN_DONOR_ADDRESSS, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ORGAN_DONOR_ADDRESSS, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-2 control-label ">
+                        <b>Donor Email</b>
+                    </div>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ORGAN_DONOR_EMAIL, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ORGAN_DONOR_EMAIL, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Update" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "OrganDonationList")
+        </div>
+</div>
+    </div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

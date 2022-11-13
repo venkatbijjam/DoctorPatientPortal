@@ -1,0 +1,148 @@
+﻿@model DP_Portal.PATIENT_PRESCRPTIONS
+
+
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>PATIENT_PRESCRPTIONS</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        <div class="control-label col-md-2">
+            DRUG NAME
+        </div>
+        <div class="col-md-3 ">
+            <input type="text" class="form-control" required id="drug_name" placeholder="Enter Drug Name" />
+        </div>
+        <div class="control-label col-md-2">
+            DRUG USAGE
+        </div>
+        <div class="col-md-3 ">
+            <input type="text" class="form-control" required id="drug_usage" placeholder="Enter Drug usage details" />
+        </div>
+        <div class="col-md-2">
+            <input type="submit" value="Add" id="add" class="btn btn-primary" />
+        </div>
+
+    </div>
+
+    <hr />
+
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal">
+            <div class="form-group">
+                <h4>&nbsp; &nbsp; PRESCRPTIONS DETAILS</h4>
+            </div>
+            <hr />
+            <div class="form-group ">
+                <table class='col-md-12'>
+                    <tr></tr>
+                </table>
+
+            </div>
+            <div class="col-md-10">
+                &nbsp;
+            </div>
+            <div class="col-md-2">
+                <input type="submit" value="Generate Prescrption" id="generete" class="btn btn-success" />
+            </div>
+        </div>
+    }
+</div>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<style>
+    table {
+        margin: 25px 0;
+        width: 200px;
+    }
+
+        table th, table td {
+            padding: 10px;
+            text-align: center;
+        }
+
+    table, th, td {
+        border: 1px solid;
+    }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+</script>
+<script>
+
+    $(document).ready(function () {
+        var prescrption = [];
+        $('#generete').hide();
+        $("#add").click(function () {
+            var drug = $('#drug_name').val();
+            var usage = $('#drug_usage').val();
+            if (drug != "" && usage != "") {
+                markup = "<tr scope='row' class=' " + drug + usage + "'><td><div class='col-md-10 form-control' > " + drug + " &nbsp; : &nbsp;" + usage + "</div > </td> <div class='col-md-2 form-control' ><td><input type='button' class='removeButton btn btn-primary' value='remove' id='" + drug + usage + "' onclick='remove()' ></td ></div></tr > ";
+                tableBody = $("table tbody");
+                tableBody.append(markup);
+                $('#drug_name').val("");// = "";
+                $('#drug_usage').val("");// = "";
+                $('#generete').show();
+
+
+
+                var obj = {
+                    DRUG_NAME: DRUG_NAME,
+                    DRUG_USAGE: DRUG_USAGE,
+                    APPOINTMENT_ID: APPOINTMENT_ID
+
+                };
+
+                var clonedobj = jQuery.extend({}, obj);
+                clonedobj.DRUG_NAME = drug;
+                clonedobj.DRUG_USAGE = usage;
+                clonedobj.APPOINTMENT_ID = 100
+                prescrption.push(clonedobj);
+
+            }
+
+
+
+        });
+
+        $(".remove").click(function () {
+            alert($(this).attr('id'));
+        });
+
+        $(document).on('click', '.removeButton', function () {
+            // $(this).closest("div.row").remove();
+
+            $('.' + $(this).attr('id')).remove();
+        });
+        $("#generete").click(function () {
+
+            prescrption = JSON.stringify({ 'prescrption': prescrption });
+
+            $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                url: '/Doctor/Prescription',
+                data: things,
+                success: function () {
+
+                },
+                failure: function (response) {
+
+                }
+            });
+        });
+
+
+
+    });
+</script>

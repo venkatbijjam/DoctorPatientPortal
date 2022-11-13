@@ -1,0 +1,57 @@
+﻿@model IEnumerable<DP_Portal.APPOINTMENT>
+
+@{
+    ViewBag.Title = "DoctorDashboard_Copy";
+}
+
+<h2>DoctorDashboard_Copy</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.APPOINTMENT_DATE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BOOKED_DATE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IS_ACTIVE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.USER.USER_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.USER1.USER_NAME)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.APPOINTMENT_DATE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BOOKED_DATE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IS_ACTIVE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.USER.USER_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.USER1.USER_NAME)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.APPOINTMENT_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.APPOINTMENT_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.APPOINTMENT_ID })
+        </td>
+    </tr>
+}
+
+</table>

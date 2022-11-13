@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DP_PortalModelStoreContainer" CdmEntityContainer="DP_PortalEntities">
+    <EntitySetMapping Name="USERS">
+      <EntityTypeMapping TypeName="DP_PortalModel.USER">
+        <MappingFragment StoreEntitySet="USERS">
+          <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
+          <ScalarProperty Name="USER_TYPE" ColumnName="USER_TYPE" />
+          <ScalarProperty Name="MOBILE" ColumnName="MOBILE" />
+          <ScalarProperty Name="LAST_NAME" ColumnName="LAST_NAME" />
+          <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="EMAIL_ID" ColumnName="EMAIL_ID" />
+          <ScalarProperty Name="USER_NAME" ColumnName="USER_NAME" />
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USERS_TYPE">
+      <EntityTypeMapping TypeName="DP_PortalModel.USERS_TYPE">
+        <MappingFragment StoreEntitySet="USERS_TYPE">
+          <ScalarProperty Name="USER_TYPE_NAME" ColumnName="USER_TYPE_NAME" />
+          <ScalarProperty Name="USER_TYPE_ID" ColumnName="USER_TYPE_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="APPOINTMENTS">
+      <EntityTypeMapping TypeName="DP_PortalModel.APPOINTMENT">
+        <MappingFragment StoreEntitySet="APPOINTMENTS">
+          <ScalarProperty Name="APPPOINMENT_STATUS" ColumnName="APPPOINMENT_STATUS" />
+          <ScalarProperty Name="IS_ACTIVE" ColumnName="IS_ACTIVE" />
+          <ScalarProperty Name="BOOKED_DATE" ColumnName="BOOKED_DATE" />
+          <ScalarProperty Name="APPOINTMENT_DATE" ColumnName="APPOINTMENT_DATE" />
+          <ScalarProperty Name="DOCTOR_ID" ColumnName="DOCTOR_ID" />
+          <ScalarProperty Name="PATIENT_ID" ColumnName="PATIENT_ID" />
+          <ScalarProperty Name="APPOINTMENT_ID" ColumnName="APPOINTMENT_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="APPOINTMENT_DETAILS">
+      <EntityTypeMapping TypeName="DP_PortalModel.APPOINTMENT_DETAILS">
+        <MappingFragment StoreEntitySet="APPOINTMENT_DETAILS">
+          <ScalarProperty Name="DISEASE_DETAILS" ColumnName="DISEASE_DETAILS" />
+          <ScalarProperty Name="APPOINTMENT_ENDTIME" ColumnName="APPOINTMENT_ENDTIME" />
+          <ScalarProperty Name="APPOINTMENT_STARTTIME" ColumnName="APPOINTMENT_STARTTIME" />
+          <ScalarProperty Name="APPOINTMENT_ID" ColumnName="APPOINTMENT_ID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PATIENT_PRESCRPTIONS">
+      <EntityTypeMapping TypeName="DP_PortalModel.PATIENT_PRESCRPTIONS">
+        <MappingFragment StoreEntitySet="PATIENT_PRESCRPTIONS">
+          <ScalarProperty Name="DRUG_USAGE" ColumnName="DRUG_USAGE" />
+          <ScalarProperty Name="DRUG_NAME" ColumnName="DRUG_NAME" />
+          <ScalarProperty Name="APPOINTMENT_ID" ColumnName="APPOINTMENT_ID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PATIENT_DETAILS">
+      <EntityTypeMapping TypeName="DP_PortalModel.PATIENT_DETAILS">
+        <MappingFragment StoreEntitySet="PATIENT_DETAILS">
+          <ScalarProperty Name="WEIGHT" ColumnName="WEIGHT" />
+          <ScalarProperty Name="HEIGHT" ColumnName="HEIGHT" />
+          <ScalarProperty Name="GENDER" ColumnName="GENDER" />
+          <ScalarProperty Name="DATE_OF_BIRTH" ColumnName="DATE_OF_BIRTH" />
+          <ScalarProperty Name="PATIENT_ID" ColumnName="PATIENT_ID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SLOTS">
+      <EntityTypeMapping TypeName="DP_PortalModel.SLOT">
+        <MappingFragment StoreEntitySet="SLOTS">
+          <ScalarProperty Name="END_TIME" ColumnName="END_TIME" />
+          <ScalarProperty Name="START_TIME" ColumnName="START_TIME" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ORGAN_DONORS">
+      <EntityTypeMapping TypeName="DP_PortalModel.ORGAN_DONORS">
+        <MappingFragment StoreEntitySet="ORGAN_DONORS">
+          <ScalarProperty Name="ORGAN_USER_ID" ColumnName="ORGAN_USER_ID" />
+          <ScalarProperty Name="UPDATE_DATE" ColumnName="UPDATE_DATE" />
+          <ScalarProperty Name="ORGAN_DONOR_RECORD_ACTIVE" ColumnName="ORGAN_DONOR_RECORD_ACTIVE" />
+          <ScalarProperty Name="ORGAN_DONOR_EMAIL" ColumnName="ORGAN_DONOR_EMAIL" />
+          <ScalarProperty Name="ORGAN_DONOR_ADDRESSS" ColumnName="ORGAN_DONOR_ADDRESSS" />
+          <ScalarProperty Name="ORGAN_DONATION_SIGNED_DATE" ColumnName="ORGAN_DONATION_SIGNED_DATE" />
+          <ScalarProperty Name="ORGAN_DONATING_ORGAN" ColumnName="ORGAN_DONATING_ORGAN" />
+          <ScalarProperty Name="ORGAN_DONOR_CONTACT" ColumnName="ORGAN_DONOR_CONTACT" />
+          <ScalarProperty Name="ORGAN_DONOR_NAME" ColumnName="ORGAN_DONOR_NAME" />
+          <ScalarProperty Name="ORGAN_DONOR_ID" ColumnName="ORGAN_DONOR_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DOCTOR_SPEC">
+      <EntityTypeMapping TypeName="DP_PortalModel.DOCTOR_SPEC">
+        <MappingFragment StoreEntitySet="DOCTOR_SPEC">
+          <ScalarProperty Name="DOCTOR_MCODE" ColumnName="DOCTOR_MCODE" />
+          <ScalarProperty Name="DOCTOR_ADDRESS" ColumnName="DOCTOR_ADDRESS" />
+          <ScalarProperty Name="DOCTOR_SPEC1" ColumnName="DOCTOR_SPEC" />
+          <ScalarProperty Name="DOCTOR_ID" ColumnName="DOCTOR_ID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

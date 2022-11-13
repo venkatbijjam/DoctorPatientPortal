@@ -1,0 +1,326 @@
+﻿@model DP_Portal.Models.AppointmentDetails
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout_1.cshtml";
+}
+
+
+
+<style>
+  
+
+    .prescription_form {
+        width: 100%;
+        height: 100vh;
+        background: white;
+    }
+
+    .prescription {
+        width: 720px;
+        height: 30%;
+        margin: 0 auto;
+        border: 1px solid lightgrey;
+    }
+
+        .prescription tr > td {
+            padding: 15px;
+        }
+
+    .header {
+        color: #333;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        flex: 1;
+    }
+
+        .logo img {
+            width: 120px;
+            height: 120px;
+            float: left;
+        }
+
+    .credentials {
+        flex: 1;
+    }
+
+        .credentials h4 {
+            line-height: 1em;
+            letter-spacing: 1px;
+            font-weight: 700;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .credentials p {
+            margin: 0 0 5px 0;
+            padding: 3px 0px;
+        }
+
+        .credentials small {
+            margin: 0;
+            padding: 0;
+            letter-spacing: 1px;
+            padding-right: 80px;
+        }
+
+    .d-header {
+        width: 100%;
+        text-align: center;
+        background: mediumseagreen;
+        padding: 5px;
+        color: white;
+        font-weight: 800;
+    }
+
+    .symptoms,
+    .tests,
+    .advice {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+
+        .symptoms ul,
+        .tests ul {
+            list-style: square;
+            margin: 0;
+            padding-left: 10px;
+            height: 100%;
+        }
+
+        .advice p {
+            letter-spacing: 0;
+            font-size: 14px;
+        }
+
+        .advice .adv_text {
+            flex-grow: 1;
+            width: 100%;
+            height: 100%;
+        }
+
+    .desease_details {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .med_name {
+        font-size: 16px;
+        font-weight: bold;
+        padding: 0;
+    }
+
+    .taking_time {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        text-align: right;
+    }
+
+    .schedual {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .sc_time {
+        margin: 0;
+        padding: 0;
+        float: left;
+    }
+
+        .sc_time span {
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+
+    .sc {
+        border: none;
+        outline: none;
+        font-size: 15px;
+    }
+
+  
+    .med_name {
+        border: 0;
+        outline: 0;
+    }
+
+    .period {
+        font-size: 14px;
+    }
+
+  
+
+    .medicine {
+        display: flex;
+        flex-flow: column;
+        height: 100%;
+    }
+
+    .med_name_action,
+    .med_when_action,
+    .med_period_action {
+        display: none;
+    }
+
+    .med_meal_action .btn {
+        margin: 2px;
+    }
+
+    .med_period {
+        border: none;
+        outline: none;
+    }
+
+    #add_med {
+        margin: 20px 5px;
+        flex-grow: 1;
+    }
+
+
+
+    #add_symptoms {
+        margin: 20px 5px;
+        flex-grow: 1;
+        opacity: 1;
+    }
+
+    .symp_action,
+    .test_action,
+    .adv_action {
+        display: none;
+    }
+
+    .med_footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    hr {
+        margin: 10px 0px;
+    }
+
+    .med:hover hr {
+        border-top: 3px #111 solid;
+    }
+
+    .med_period_action {
+        float: right;
+    }
+
+    span.date {
+        color: #333399;
+        float: right;
+        clear: both;
+    }
+
+    .del_action {
+        width: 100%;
+        text-align: right;
+    }
+
+    .delete {
+        width: 50px;
+        opacity: 0;
+        display: none;
+    }
+
+    .med:hover .delete {
+        display: inline;
+        opacity: 1;
+    }
+
+    .folded {
+        visibility: hidden;
+    }
+
+    .button_group {
+        position: fixed;
+        right: 120px;
+        bottom: 100px;
+    }
+
+</style>
+<div class="wrapper">
+    <div class="prescription_form">
+        <table class="prescription"  border="1">
+            <tbody>
+                <tr height="15%">
+                    <td colspan="2">
+                        <div class="header">
+                            <div class="logo">
+                                <img src="https://seeklogo.com/images/H/hospital-clinic-plus-logo-7916383C7A-seeklogo.com.png" />
+                            </div>
+
+                            <div class="credentials">
+                                <h5>Patient Name : @Model.Patient_FIRST_NAME &nbsp; @Model.patient_LAST_NAME </h5>
+                                <p>Patient Contact : @Model.Patient_Mobile_Number</p>
+                                <p>Issued Date:@Model.Appointment_Date </p>
+
+                            </div>
+                            <div class="credentials">
+                                <h4>@Model.Consulting_Doctor</h4>
+                                <p>@Model.Consulting_Doctor</p>
+                                <small>2323 N.WoodLawn Blvd, Wichita, Kansas 67220 </small>
+                                <br />
+                                <small>Mb. 0XXXXXXXXX</small>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="40%">
+                        <div class="desease_details">
+                            <div class="symptoms">
+                                <h4 class="d-header">Symptoms</h4>
+                                <ul class="symp" data-toggle="tooltip" data-placement="bottom"
+                                    contenteditable="true">
+                                    <li>
+                                        @Model.Disease_Details
+                                    </li>
+                                </ul>
+
+                            </div>
+
+
+                        </div>
+                    </td>
+                    <td width="60%" valign="top">
+                        <span style="font-size: 3em;">R<sub>x</sub></span>
+                        <hr />
+                        <div class="medicine">
+                            <section class="med_list"></section>
+                            <div id="add_med" data-placement="right">
+
+                                <ul>
+
+                                    @foreach (var item in @Model.list_patient_prescriptions)
+                                    {
+                                        <li>
+                                            @Html.DisplayFor(modelItem => item.DRUG_NAME) - @Html.DisplayFor(modelItem => item.DRUG_USAGE)
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="button_group">
+            <button class="issue_prescription btn btn-success"> <a href="javascript:window.print()">Print</a></button>
+            
+        </div>
+
+    </div>
+</div>

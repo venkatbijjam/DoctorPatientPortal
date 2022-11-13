@@ -1,0 +1,117 @@
+﻿@model DP_Portal.Models.Doctor_Search_list
+
+@{
+    ViewBag.Title = "DoctorList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="panel panel-primary">
+    <!-- Default panel contents -->
+    <div class="panel-heading" style="text-align:center">
+        <h4>
+            Book an Appointment
+        </h4>
+    </div>
+    <div class="panel-body">
+
+
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="col-xs-6">
+                <h2 class="sub-header">Booking Doctor </h2>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+
+
+                        </thead>
+                        <tbody>
+                            <tr>
+
+                                <td class="col-md-3">
+                                    @Html.LabelFor(model => model.appointment_Date, "Appointment Date", htmlAttributes: new { @class = "control-label" })
+
+                                </td>
+                                <td class="col-md-6">
+                                    @Html.EditorFor(model => model.appointment_Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.appointment_Date, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td class="col-md-3"> <b>Slot Time</b></td>
+                                <td class="col-md-3">
+                                    <input class="form-control" id="slot_time" value="@Model.slot_start ~ @Model.slot_end" type="text" readonly />
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-3">   <b>Available Doctors List</b></td>
+                                <td class="col-md-3">
+                                    @Html.DropDownList("Available_Doctors", null, htmlAttributes: new { @class = "form-control" })
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="col-md-3">
+                                    @Html.LabelFor(model => model.reason, "Reason", htmlAttributes: new { @class = "control-label" })
+                                </td>
+                                <td class="col-md-3">
+                                    @Html.EditorFor(model => model.reason, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.reason, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-3">
+                                    @Html.ActionLink("Back to List", "Create")
+                                </td>
+                                <td class="col-md-3">
+                                    <input type="submit" value="Book" class="btn btn-primary" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <h2 class="sub-header">Doctor Specializations</h2>
+                <div class="table-responsive">
+                    <table class="table table-striped" style="border-style:dashed">
+                        <thead>
+                            <tr>
+
+                                <th class="col-md-2">Doctor Name</th>
+                                <th class="col-md-4">Specialization</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model.doctors_list)
+                            {
+                                <tr>
+                                    <td class="col-md-2">
+                                        Dr. @item.LAST_NAME
+
+                                    </td>
+                                    <td class="col-md-4">
+                                        @item.DOCTOR_SPEC.Select(a => a.DOCTOR_SPEC1).FirstOrDefault()
+                                    </td>
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        }
+
+    </div>
+
+
+</div>

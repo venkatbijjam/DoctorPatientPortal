@@ -1,0 +1,83 @@
+﻿@model DP_Portal.USER
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>User Details</h2>
+
+<div>
+    <h4>USER</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.USER_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.USER_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EMAIL_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EMAIL_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PASSWORD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PASSWORD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FIRST_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FIRST_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LAST_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LAST_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MOBILE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MOBILE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ISACTIVE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ISACTIVE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.USERS_TYPE.USER_TYPE_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.USERS_TYPE.USER_TYPE_NAME)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.USER_ID }) |
+    @Html.ActionLink("Back to List", "AdminManageUsers")
+</p>
